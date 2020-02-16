@@ -56,6 +56,7 @@ app.post("/", function(req, response) {
       //then response.send() works like an enter button/key
       response.write("<p>The last updated date and time is: "+dateAndTime+" </p>");
       response.write("<h1>The Bitcoin price in " + curr + " is: " + price + " </h1>");
+      response.write("<em><a href='https://www.coindesk.com'>Powered by coindesk</a></em>")
       response.send();
 
       //REQUEST, req
