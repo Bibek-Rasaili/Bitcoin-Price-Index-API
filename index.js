@@ -7,33 +7,28 @@ app.use(bodyParse.urlencoded({
   extended: true
 }));
 
-
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
 
-
 app.post("/", function(req, response) {
-  // console.log(req.body.crypto);
-  var fiatCurrency = req.body.fiat;
+  var fiatCurrency = req.body.fiat; //gets the form option value via body-parser
 
-  console.log(fiatCurrency);
   request('https://api.coindesk.com/v1/bpi/currentprice/' + fiatCurrency + '.json',
     function(err, res, body) {
       // console.log(err);
       // console.log('statusCode:', res.statusCode);
 
       var data = JSON.parse(body); //converts the JSON into JS Object
-
       var price = data.bpi;
 
-      console.log(price);
+      var dateAndTime = data.time.updateduk;
 
       var curr;
       // if (fiatCurrency === "CNY")
       //   curr = "Yuan"
-
+      //using switch instead of if statement
       switch (fiatCurrency) {
         case "CNY":
           curr = "Yuan";
@@ -55,14 +50,18 @@ app.post("/", function(req, response) {
           break;
 
         default:
+        console.log("Error has occured! check switch statement");
       }
-      response.send("<h1>The Bitcoin price in " + curr + " is: " + price + " </h1>")
+      //in order to send multiple lines, use response.write
+      //then response.send() works like an enter button/key
+      response.write("<p>The current date is: "+dateAndTime+" </p>");
+      response.write("<h1>The Bitcoin price in " + curr + " is: " + price + " </h1>");
+      response.send();
 
       //REQUEST, req
       //RESPONSE, res
-      //THEY CAN CONFLICT and OVERLOAD!! CARE!
+      //conflict and overload can occur, careful!!
     });
-
 });
 
 
