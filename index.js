@@ -54,7 +54,7 @@ app.post("/", function(req, response) {
       }
       //in order to send multiple lines, use response.write
       //then response.send() works like an enter button/key
-      response.write("<p>The current date is: "+dateAndTime+" </p>");
+      response.write("<p>The last updated date and time is: "+dateAndTime+" </p>");
       response.write("<h1>The Bitcoin price in " + curr + " is: " + price + " </h1>");
       response.send();
 
