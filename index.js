@@ -56,7 +56,7 @@ app.post("/", function(req, response) {
       }
       //in order to send multiple lines, use response.write
       //then response.send() works like an enter button/key
-      response.write("<body style='text-align: center; font-size:2rem;'>");//Added for mobile
+      response.write("<body style='text-align: center; font-size:1.8rem;'>");//Added for mobile
       response.write("<p>The last updated date and time is: "+dateAndTime+" </p>");
       response.write("<h1>The Bitcoin price in " + curr + " is: " + price + " </h1>");
       response.write("<em><a href='https://www.coindesk.com'>Powered by coindesk</a></em>")
